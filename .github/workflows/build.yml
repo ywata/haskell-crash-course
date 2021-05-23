@@ -5,9 +5,11 @@ defaults:
     shell: bash
 
 on:
-  release:
-    types: [created]
-
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
 jobs:
 
   build:
