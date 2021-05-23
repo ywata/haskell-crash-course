@@ -31,6 +31,9 @@ the above.
 > import BasicFunctions
 > import AbstractDataTypes
 > import Recursives
+>
+> main :: IO()
+> main = return ()
 
 
 
