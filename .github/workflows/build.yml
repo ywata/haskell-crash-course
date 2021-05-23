@@ -40,7 +40,7 @@ jobs:
     - uses: haskell/actions/setup@v1
       with:
         ghc-version: ${{ matrix.ghc }}
-        cabal-version: '3.2'
+        cabal-version: '3.4'
 
     - name: Set some window specific things
       if: matrix.os == 'windows-latest'
@@ -71,3 +71,9 @@ jobs:
       run: |
         cabal build $LINUX_CABAL_ARGS || \
         cabal build $LINUX_CABAL_ARGS -j1
+
+    - name: Test Crash Course
+      # Try building it twice in case of flakey builds on Windows
+      run: |
+        cabal test $LINUX_CABAL_ARGS || \
+        cabal test $LINUX_CABAL_ARGS -j1
