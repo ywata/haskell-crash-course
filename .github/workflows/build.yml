@@ -16,10 +16,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         ghc: ['8.10.4']
-        os: [macOS-latest]
+        os: [macOS-latest, ubuntu-18.04, windows-latest]
         exclude:
           - os: windows-latest
             ghc: '8.10.2' # broken due to https://gitlab.haskell.org/ghc/ghc/-/issues/18550
@@ -51,13 +51,13 @@ jobs:
         GHC_VER=$(echo $GHC_VER | sed 's/8.10.2.2/8.10.2/g')
         echo "GHC_VERSION=$GHC_VER" >> $GITHUB_ENV
 
-    - name: Set some linux specific things
-      if: matrix.os == 'ubuntu-18.04'
-      env:
-        GHC_VER: ${{ matrix.ghc }}
-      run: |
-        echo "LINUX_CABAL_ARGS=--enable-executable-static --ghc-options=-split-sections" >> $GITHUB_ENV
-        echo "GHC_VERSION=$GHC_VER" >> $GITHUB_ENV
+#    - name: Set some linux specific things
+#      if: matrix.os == 'ubuntu-18.04'
+#      env:
+#        GHC_VER: ${{ matrix.ghc }}
+#      run: |
+#        echo "LINUX_CABAL_ARGS=--enable-executable-static --ghc-options=-split-sections" >> $GITHUB_ENV
+#        echo "GHC_VERSION=$GHC_VER" >> $GITHUB_ENV
 
     - name: Set some macOs specific things
       if: matrix.os == 'macOS-latest'
