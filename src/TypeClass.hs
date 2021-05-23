@@ -1,6 +1,6 @@
 module TypeClass where
+import Prelude (String)
 -- I wonder I cover this as crash cource.
-import Prelude (List(..))
 
 -- Type class sounds like a class in Java but it actually not.
 -- It is much similar to interface in Java. Do not confuse it.

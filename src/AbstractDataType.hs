@@ -1,4 +1,4 @@
-module AbstractDataTypes where
+module AbstractDataType where
 
 import Prelude (
   Int, String, Double, Num(..)
@@ -16,9 +16,11 @@ a3 = Pair 100 undefined -- You do not normally care about undeifned value.
 
 data DPair = DPair Double Double -- Type constructor and data constructor can be same name.
 
+-- Actually, Prelude has generic predefined version of Pair but without explicit name.
+a4 = (100, "a")         -- It is essentially same as a2, right?
 
 -- In Haskell, because Bool is not a primitive type,
--- you can define Bool like if you do not import Bool.
+-- You can define Bool,  if you do not import Bool.
 data Bool = False | True  -- Bool is type constructor and True and False are data constructor
 b1, b2, b3 :: Bool
 b1 = False
@@ -26,17 +28,18 @@ b2 = True
 b3 = undefined -- You do not normally care about undeifned value.
 
 
--- Maybe is essentially a Optional type in Java. It requires one type to be a type.
-data Maybe a = Nothing | Just a -- Maybei is type constructor and Nothing and Just are data constructor
-{-You cannot implement this type easily in Java.-}
+-- Maybe is Optional type in Java. It requires one type to be a type.
+data Maybe a = Nothing | Just a -- Maybe is a type constructor and Nothing and Just are data constructors.
+{-You cannot implement this type in Java.-}
 c1, c2, c3, c4 :: Maybe Bool
-c1 = Nothing     -- You can distinguish Nothing and (Just ???)
+c1 = Nothing     -- You can distinguish Nothing and (Just False)
 c2 = Just True   -- Just contains a value of Bool in this case.
 c3 = Just False
 c4 = undefined   -- You do not normally care about undeifned value.
 
 
-
+-- Examples of ADT
+-- Modeling studant record.
 data Major = Physics | Mathematics | ComputerScience | History
 data Student = Student{
   name            :: String,
@@ -60,8 +63,10 @@ bob = Student{
   , major = Physics
   , secondMajor = Just History}
 
+-- Field name is a function. name :: Student -> String
 nameBob  = name bob
 majorBob = major bob
+--alice' = alice{secondMajor = ComputerScience}
 
 -- Function using ADT.
 
@@ -85,7 +90,7 @@ _     || _     = True
 
 
 
--- maybe convert (Maybe a) in two way.
+-- maybe convert a value of (Maybe a) in two way.
 -- If Nothing, fixed value of type b (or default value) is returned
 -- If (Just a),  convert a value of type a with a function
 maybe :: b -> (a -> b) -> Maybe a -> b

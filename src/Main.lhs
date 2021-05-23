@@ -27,10 +27,12 @@ As type and functions are interrelated, the order of the subjects presented is d
 the above. 
 
 
-> import BasicTypes
-> import BasicFunctions
-> import AbstractDataTypes
-> import Recursives
+> import BasicType
+> import BasicFunction
+> import AbstractDataType
+> import Recursive
+> import HigherOrderFunction
+> import IO
 >
 > main :: IO()
 > main = return ()

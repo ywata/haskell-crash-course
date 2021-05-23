@@ -1,4 +1,4 @@
-module BasicFunctions where
+module BasicFunction where
 
 -- Only listed types and functions are imported
 import Prelude (
@@ -11,7 +11,7 @@ import Prelude (
   )
 
 -- head and tail are considered to be unsafe function because they are partiall function not tottal.
--- Total function is a function which returns value exept undefined value.
+-- Total function is a function which returns value for all inputs.
 -- Partial function is a function not total.
 
 
@@ -20,12 +20,16 @@ import Prelude (
 
 {-
 In general, type of function is (a -> b) where a and b are any type including function type.
+(The idea is defined recursively or inductively.)
 Int -> Int
 String -> Int
 String -> String
 String -> Char
-are function and
-String -> String -> String interpreted as String -> (String -> String) is also a (function) type.
+are type of a function and
+String -> String -> String is too.
+It is interpreted as String -> (String -> String) not (String -> String) -> String.
+The former is a function whose input is a String and returns a function from String to String.
+On the other hand, the latter is a function whose input is a function from String to Stiring and output is String.
 
 Even more
 String -> (String -> Bool) -> String
@@ -36,7 +40,6 @@ a0 = length []
 a1 = length [1,2,3]
 a2 = length ['a','b','c']
 a3 = length "abc"
-
 
 --b0 = head []  -- This is error because nil has no head element.
 b1 = head [1,2,3]
@@ -90,7 +93,7 @@ f3 = reverse [1, 2]                     -- [2,1]
 f4 = reverse [1,2,3]                    -- [3,2,1]
 
 
--- List of Integer List
+-- List of List of Integer
 g0, g1, g2, g3, g4, g5 :: [[Int]] 
 g0 = []
 g1 = [[]]
@@ -117,16 +120,16 @@ h1'     = const 1      -- same h1
 h2 x    = x + 1        -- increment by 1
 h2'     = \x -> x + 1  -- lambda
 h2'' x  = (+1) x       -- section
-h2'''   = (+1)         -- \eta conversion
+h2'''   = (+1)         -- \eta converted version of h2''
 
 
 
 -- Basic function definitions for filter
 i1, i1', i2, i2', i3, i3' :: Int -> Bool
 i1 i   = True         -- always return True
-i1'    = const True   -- same as f1 const is defined in Prelude
+i1'    = const True   -- same as i1 const is defined in Prelude
 i2 i   = False        -- always return False
-i2'    = const False  -- same as f3
+i2'    = const False  -- same as i2
 i3   i = i == 0       --
 i3'  i = if i == 0    -- if then else returns value
            then True

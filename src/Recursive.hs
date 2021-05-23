@@ -1,4 +1,4 @@
-module Recursives where
+module Recursive where
 
 import Prelude (
   Int, Bool
@@ -100,7 +100,7 @@ wiredMap :: (a -> b) -> List a -> List b
 --                 In this case Nil and Cons
 --                 It means, you need at least two cases if the function is trivial.
 --                 It does not mean two cases are enough for all purpose.
-wiredMap f Nil = implement
+wiredMap f Nil                   = implement
 wiredMap f (Cons x Nil)          = Nil -- Note pattern match works like this.
 wiredMap f (Cons x (Cons y Nil)) = Nil -- Arbitrary nesting can be pattern matched.
 wiredMap f _                     = implement
