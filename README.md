@@ -2,6 +2,8 @@
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
+[![Builds](https://github.com/ywata/haskell-crash-course/actions/workflows/build.yml/badge.svg)](https://github.com/ywata/haskell-crash-course/actions/workflows/build.yml)
+
 The aim of this crash course is to learn important concepts of Haskell very quickly.
 Because self studying Haskell is somewhat hard in the begging,
 this material is intended to resolve the issue solving some excercises with a intermediate Haskeller.
