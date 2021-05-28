@@ -32,6 +32,7 @@ the above.
 > import AbstractDataType
 > import Recursive
 > import HigherOrderFunction
+> import TypeClass
 > import IO
 >
 > main :: IO()

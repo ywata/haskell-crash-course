@@ -2,15 +2,37 @@ module Recursive where
 
 import Prelude (
   Int, Bool
+  , Integer
   , Num(..)
   , Maybe(..)
   , otherwise
   , undefined
-  , (<=)
+  , (<=), (>), (==)
                )
 -- Haskell can define recursive type and can manipulate data with recursive function
 
 implement = undefined
+
+-- addition
+add 0 n = n
+add n m = 1 + add (n -1) m
+
+-- multiplication
+mul 0 n = 0
+mul n m = add m implement
+
+
+-- factorial
+fact :: Integer -> Integer
+fact n | n > 0 = n * fact (n -1)
+       | n == 0 = 1
+       | otherwise = 0
+
+-- Ackerman function
+ack :: Integer -> Integer -> Integer
+ack 0 n = n + 1
+ack m 0 = ack (m -1) 1
+ack m n = ack (m -1) (ack m (n-1))
 
 data List a = Nil | Cons a (List a) -- Theses are essentially correspond to [] and [a]
 -- List a appears in Cons case. AST can express resursive structure.
@@ -124,3 +146,12 @@ wiredMap''' f xs
   -- otherwise is just True.
   | otherwise      = implement
                               
+
+-- Recursive function acts as loop
+sumInt :: List Int -> Int
+sumInt Nil = 0
+sumInt (Cons x xs) = x + sumInt xs
+b0 = sumInt Nil
+b1 = sumInt (Cons 1 (Cons 2 (Cons 3 (Cons 4 Nil))))
+
+--

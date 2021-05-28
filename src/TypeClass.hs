@@ -22,4 +22,14 @@ instance Show Bool where
   show False = "False"
   show True = "True"
 
--- 
+
+
+-- I'm wondering what I show in this part.
+-- Especially, explainig Functor Applicative and Monad in this section affects
+-- how I show IO. It is possible to show IO without such information and
+-- presenting abstract information may harm understanding IO.
+
+-- Another consideration is even if I do not mention Functor/Applicative/Monad,
+-- there are many important type class defined in Haskell.
+-- Those includes:
+-- Read, Show, Eq, Ord, Enum and Monoid.
