@@ -4,31 +4,32 @@
 
 [![Builds](https://github.com/ywata/haskell-crash-course/actions/workflows/build.yml/badge.svg)](https://github.com/ywata/haskell-crash-course/actions/workflows/build.yml)
 
-The aim of this crash course is to learn important concepts of Haskell very quickly.<br />
-Because self studying Haskell is somewhat hard in the begging,
-this material is intended to resolve the issue solving some excercises with a intermediate Haskeller.<br />
-After you finish this material with your tutor, you'll experience productivity of Haskell and fun.
+The aim of this crash course is to learn important concepts of Haskell very quickly.
+
+Self-studying Haskell is somewhat hard in the begging.<br />
+This material is intended to resolve the issue solving some excercises with the help of an intermediate Haskeller.
+
+After you finish this material with your tutor, you'll experience the productivity and fun of Haskell.
 
 ## Contents
 
-In this material, the author plants to cover basic functionality of Haskell.
+In this material, the author plants to cover basic functionality of Haskell, which includes the following:
 
-That should cover:
-## Tool
+### Tool
 
 * REPL
 * Literate programming
 
-## Language
+### Language
 
-* Type
-    * ADT(Abstract Data Type)
+* Types
+    * ADT (Abstract Data Type)
     * Pattern match
-    * Compile error(~= type error)
-* Function
+    * Compile error (~= type error)
+* Functions
     * Recursive function
     * Composition of functions and higher order functions
-* Unit Test
+* Unit Tests
 * IO
 
 As type and functions are interrelated, the order of the subjects presented is different from the above.
