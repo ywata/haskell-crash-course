@@ -142,15 +142,14 @@ g4' = concat [[1,2,3]]
 g5' = concat [[1,2,3], [], [1, 2, 3]]
 
 
--- Basic function definitions for map
+-- Basic function definition examples for map
 h1, h1', h2, h2', h2'' :: Int -> Int
 h1 x    = 1            -- always return 1
-h1'     = const 1      -- same h1
+h1'     = const 1      -- same as h1
 h2 x    = x + 1        -- increment by 1
-h2'     = \x -> x + 1  -- lambda
-h2'' x  = (+1) x       -- section
-h2'''   = (+1)         -- \eta converted version of h2''
-
+h2'     = \x -> x + 1  -- h2 written instead as a lambda
+h2'' x  = (+1) x       -- h2 written as a section
+h2'''   = (+1)         -- \eta converted version of h2'' (notice that the variable is no longer necessary)
 
 
 -- Basic function definitions for filter
