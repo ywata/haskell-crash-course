@@ -88,6 +88,19 @@ See the bracket explanation below:
       [1,2,3] ++ ([4,5] ++ ([6] ++ [7,8,9]))
     as opposed to
       ((([1,2,3] ++ [4,5]) ++ [6]) ++ [7,8,9])
+
+The priority of a function defines which order different functions are evaluated.
+The higher priority functions are evaluated first.
+The priority of (+), addition, is 6 -- try :t (+) in the repl.
+The priority of (*), multiplication is 7 -- try :t (*) in the repl.
+Therefore, multiplication is higher priority than addition, and thus is evaluated first.
+See the bracket explanation below:
+
+  1 + 2 * 3
+    is
+      1 + (2 * 3)
+    as opposed to
+      (1 + 2) * 3
 -}
 
 
