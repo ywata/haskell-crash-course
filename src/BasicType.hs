@@ -74,52 +74,51 @@ i2
 
 -}
 
--- Slightly  complex type
--- List
-li0 :: [Int]     -- List of Int defined(or loaded) in Prelude
+-- Slightly complex types
+-- Lists
+li0 :: [Int]     -- List of Int -- the [] syntax is defined in Prelude
 li0 = []         -- empty list or nil
 
 li1 :: [Int]     -- type
 li1 = [1]        -- list of one element
 
 li2 :: [Int]
-li2 = [1,2]
+li2 = [1, 2]
 
 lc0 :: [Char]    -- List of Char
 lc0 = []         -- empty list
 
 lc1 :: [Char]    -- type
-lc1 = ['あ']        -- list of one element
+lc1 = ['あ']      -- list of one element
 
 lc2 :: [Char]
 lc2 = ['a', 'b'] -- List of two Chars
 
--- CHECK lc2's type on repl
+-- CHECK lc2's type in the repl using ":t lc2".
+-- Remember you can open the repl with the "cabal repl" command.
 
 
--- Actually String and [Char] are exactly same.
--- String is an alias of [Char] like this.
-type String' = [Char] 
+-- Actually, String and [Char] are exactly same...
+-- String is just an alias of [Char],
+-- Like this:
+type String' = [Char]
+{- Also notice how we put the ' at the end of the type name.
+   This is perfectly legal in Haskell, and is used often.
+   You will see this often. It is generally used when two or more functions
+   or variables are very closely related. -}
 
 
--- RUN repl 
+-- RUN the following in the repl:
 {-
+
 :m +BasicTypes
 :t Char
---  error: Data constructor not in scope
+  --  error: Data constructor not in scope
+
 :t String
--- error: Data constructor not in scope
+  -- error: Data constructor not in scope
+
 -}
--- you cannot get type of Types
 
-
-
-
-
-
-
-
-
-
-
-
+-- You cannot get type of Types.
+-- We will find out how to inspect types in the next section!
