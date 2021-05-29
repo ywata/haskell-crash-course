@@ -51,12 +51,12 @@ a3 = length "abc"           -- 3 (Remember, String is just an alias of [Char])
 -- A "total function" is a function which returns value for all inputs.
 -- A "partial function" is a function which is not total; the return value for some inputs are not defined.
 
---b0 = head []  -- This is error because nil has no head element.
+--b0 = head []    -- This is an error because nil has no head element. This is the reason head is a partial function.
 b1 = head [1,2,3]
 b2 = head ['a','b','c']
 b3 = head "abc"
 
---c0 = tail []    -- This is error because nil has no tail list.
+--c0 = tail []    -- This is an error because nil has no tail element. This is the reason tail is a partial function.
 c1 = tail [1,2,3]
 c2 = tail ['a','b','c']
 c3 = tail "abc"
