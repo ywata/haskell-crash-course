@@ -72,16 +72,22 @@ d5 = [1,2,3] ++ [4,5] ++ [6] ++ [7,8,9]
 -- CHECK on repl
 {-
 :i (++)
-
---(++) :: [a] -> [a] -> [a] 	-- Defined in ‘GHC.Base’
---infixr 5 ++
+  --(++) :: [a] -> [a] -> [a] 	-- Defined in ‘GHC.Base’
+  --infixr 5 ++
 -}
+
 {-
-infixr 5 ++  says function (++) is infix function associated to right with priority 5.
-[1,2,3] ++ [4,5] ++ [6] ++ [7,8,9] is
-[1,2,3] ++ ([4,5] ++ ([6] ++ [7,8,9]))
-not
-((([1,2,3] ++ [4,5]) ++ [6]) ++ [7,8,9])
+"infixr 5 ++" means the function (++) is a right-associated infix function with priority 5.
+"Normal" functions in Haskell are written before their inputs,
+but an infix function is a function that goes between its inputs.
+Right-association means that the right-most instance of the function is evaluated first.
+See the bracket explanation below:
+
+  [1,2,3] ++ [4,5] ++ [6] ++ [7,8,9]
+    is
+      [1,2,3] ++ ([4,5] ++ ([6] ++ [7,8,9]))
+    as opposed to
+      ((([1,2,3] ++ [4,5]) ++ [6]) ++ [7,8,9])
 -}
 
 
