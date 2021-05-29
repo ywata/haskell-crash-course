@@ -13,7 +13,10 @@ comment -}
 -}
 
 
--- In this course, I'll explicitly import things.
+{- The Prelude module is automatically imported,
+   but in this course, we'll explicitly import things.
+   Notice how you can specify which parts of a module to import.
+   Here, we are importing Bool, Char, Int, etc... -}
 import Prelude (Bool(..), Char, Int, String, Float, Double,
                 Num(..),
                 undefined)
