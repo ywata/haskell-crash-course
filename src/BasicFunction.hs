@@ -10,31 +10,40 @@ import Prelude (
   (==)
   )
 
--- head and tail are considered to be unsafe function because they are partiall function not tottal.
--- Total function is a function which returns value for all inputs.
--- Partial function is a function not total.
+-- The fucntions "head" and "tail" are considered to be "unsafe" functions because
+-- they are "partial functions", not "total funcitions".
+-- A "total function" is a function which returns value for all inputs.
+-- A "partial function" is a function which is not total; the return value for some inputs are not defined.
 
 
 -- Type of function
--- CHECK type of length, head, tail, (++), map, filter, reverse, concat, concatMap on REPL
+-- CHECK the type of length, head, tail, (++), map, filter, reverse, concat, concatMap in the REPL.
+-- Remember, you can open the repl by running "cabal repl" in the projet's root directory.
 
 {-
-In general, type of function is (a -> b) where a and b are any type including function type.
+In general, the type of a function is (a -> b) where a and b are any type.
+a and b can even be functions.
 (The idea is defined recursively or inductively.)
 Int -> Int
 String -> Int
 String -> String
 String -> Char
-are type of a function and
+The above are all types of functions.
+
 String -> String -> String is too.
 It is interpreted as String -> (String -> String) not (String -> String) -> String.
+
 The former is a function whose input is a String and returns a function from String to String.
-On the other hand, the latter is a function whose input is a function from String to Stiring and output is String.
+On the other hand, the latter is a function whose input is a function from String to String, and its output is a String.
 
 Even more
 String -> (String -> Bool) -> String
 is also a function type.
+
+Can you describe the inputs and outputs to this function?
 -}
+
+
 a0, a1, a2, a3 :: Int
 a0 = length []
 a1 = length [1,2,3]
@@ -94,7 +103,7 @@ f4 = reverse [1,2,3]                    -- [3,2,1]
 
 
 -- List of List of Integer
-g0, g1, g2, g3, g4, g5 :: [[Int]] 
+g0, g1, g2, g3, g4, g5 :: [[Int]]
 g0 = []
 g1 = [[]]
 g2 = [[], []]
@@ -133,7 +142,7 @@ i2'    = const False  -- same as i2
 i3   i = i == 0       --
 i3'  i = if i == 0    -- if then else returns value
            then True
-           else False  
+           else False
 i3'' i = case i of -- same as h6
          0 -> True
          _ -> False
@@ -165,9 +174,3 @@ concatMap' :: (a -> [b]) -> [a] -> [b]
 concatMap' f xs = concat (map f xs)
 -- Note that type of f is a -> [b] not a -> b, f should generate List of type b.
 -- (map f xs) generates List of List, concat crash the outer List.
-
-
-
-
-
-
