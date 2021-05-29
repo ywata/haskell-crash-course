@@ -116,10 +116,10 @@ e4'' = "abc" ++ "de"             -- same as e4
 
 -- reverse list
 f1, f2, f3, f4 :: [Int]
-f1 = reverse []                         -- []
-f2 = reverse [1]                        -- [1]
-f3 = reverse [1, 2]                     -- [2,1]
-f4 = reverse [1,2,3]                    -- [3,2,1]
+f1 = reverse []                  -- []
+f2 = reverse [1]                 -- [1]
+f3 = reverse [1, 2]              -- [2,1]
+f4 = reverse [1,2,3]             -- [3,2,1]
 
 
 -- List of List of Integer
