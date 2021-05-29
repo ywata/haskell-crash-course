@@ -132,8 +132,8 @@ g4 = [[1,2,3]]
 g5 = [[1,2,3], [], [1, 2, 3]]
 
 
--- concat
-g0', g1', g2', g3', g4', g5' :: [Int] -- one level down from [[Int]]
+-- concat -- convert a "List of List of somethings" to just a "List of somethings"
+g0', g1', g2', g3', g4', g5' :: [Int] -- Note that this is one level down from [[Int]]
 g0' = concat []
 g1' = concat [[]]
 g2' = concat [[], []]
