@@ -23,41 +23,41 @@ import Prelude (Bool(..), Char, Int, String, Float, Double,
 
 
 -- Boolean
-b1 :: Bool      -- type
-b1 = False         -- value
+b1 :: Bool        -- type
+b1 = False        -- value
 
-b2 :: Bool      -- type
-b2 = True       -- value
+b2 :: Bool        -- type
+b2 = True         -- value
 
-b3 :: Bool      -- type
-b3 = undefined -- undefined value. Third possible value for Bool.
+b3 :: Bool        -- type
+b3 = undefined    -- undefined value. Third possible value for Bool.
 
 
 -- Integer
-i1 :: Int      -- type
-i1 = 1         -- value
+i1 :: Int         -- type
+i1 = 1            -- value
 
-i2 :: Int      -- type
-i2 = undefined -- undefined value
+i2 :: Int         -- type
+i2 = undefined    -- undefined value
 
 -- String
-s1, s2 :: String   -- type for multiple variables
-s1 = "String"  -- value
-s2 = undefined -- undefined value. What?
+s1, s2 :: String  -- type for multiple variables
+s1 = "String"     -- value
+s2 = undefined    -- undefined value. What?
 
 -- Float
-f1, f2 :: Float    -- type
-f1 = 1 + 2        -- value !
-f2 = undefined -- You can assign undefined to any variable of any type.
+f1, f2 :: Float   -- type
+f1 = 1 + 2        -- value!
+f2 = undefined    -- You can assign undefined to any variable of any type.
 
 -- Double
-d1, d2 :: Double   -- type
-d1 = 1 + 0.5   -- value
-d2 = undefined  -- I'll skip this from now on.
+d1, d2 :: Double  -- type
+d1 = 1 + 0.5      -- value
+d2 = undefined    -- I'll skip this from now on.
 
 -- Char
-c1 :: Char      -- type
-c1 = 'あ'       -- Char supports unicode
+c1 :: Char        -- type
+c1 = 'あ'         -- Char supports unicode
 
 
 -- RUN repl with cabal repl on top of project directory and type
