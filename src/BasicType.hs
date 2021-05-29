@@ -1,11 +1,12 @@
 module BasicType where
 
--- This is one line comment.
+-- This is a one-line comment.
+
 {-
-This is multiple line
+This is a multi-line
 comment -}
 
-{- You can 
+{- You can also
   {- nest
     {- multiple line comment. Yeah! -}
    -} <-- If you remove this line. You'll be get warned. Because illegal comment nest.
