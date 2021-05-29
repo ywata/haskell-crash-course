@@ -40,10 +40,10 @@ Can you describe the inputs and outputs to this function?
 
 
 a0, a1, a2, a3 :: Int
-a0 = length []
-a1 = length [1,2,3]
-a2 = length ['a','b','c']
-a3 = length "abc"
+a0 = length []              -- 0
+a1 = length [1,2,3]         -- 3
+a2 = length ['a','b','c']   -- 3
+a3 = length "abc"           -- 3 (Remember, String is just an alias of [Char])
 
 
 -- The functions "head" and "tail" are considered to be "unsafe" functions because
