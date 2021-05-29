@@ -23,27 +23,27 @@ import Prelude (Bool(..), Char, Int, String, Float, Double,
 
 
 -- Boolean
-b1 :: Bool        -- type
-b1 = False        -- value
+b1 :: Bool        -- variable type definition
+b1 = False        -- set the value
 
-b2 :: Bool        -- type
-b2 = True         -- value
+b2 :: Bool        -- variable type definition
+b2 = True         -- set the value
 
-b3 :: Bool        -- type
+b3 :: Bool        -- variable type definition
 b3 = undefined    -- undefined value. Third possible value for Bool.
 
 
 -- Integer
-i1 :: Int         -- type
+i1 :: Int         -- variable type definition
 i1 = 1            -- value
 
-i2 :: Int         -- type
-i2 = undefined    -- undefined value
+i2 :: Int         -- variable type definition
+i2 = undefined    -- set to undefined. See what this does later!
 
 -- String
-s1, s2 :: String  -- type for multiple variables
+s1, s2 :: String  -- multiple variable type definition on one line
 s1 = "String"     -- value
-s2 = undefined    -- undefined value. What?
+s2 = undefined    -- undefined value. What could this do?
 
 -- Float
 f1, f2 :: Float   -- type
@@ -53,11 +53,11 @@ f2 = undefined    -- You can assign undefined to any variable of any type.
 -- Double
 d1, d2 :: Double  -- type
 d1 = 1 + 0.5      -- value
-d2 = undefined    -- I'll skip this from now on.
+d2 = undefined    -- Let's skip this from now on. You'll see why it has limited uses in just a moment.
 
 -- Char
 c1 :: Char        -- type
-c1 = 'あ'         -- Char supports unicode
+c1 = 'あ'         -- Char also supports unicode characters
 
 
 -- From this project's root directory, RUN repl with "cabal repl".
