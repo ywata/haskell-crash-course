@@ -10,11 +10,6 @@ import Prelude (
   (==)
   )
 
--- The fucntions "head" and "tail" are considered to be "unsafe" functions because
--- they are "partial functions", not "total funcitions".
--- A "total function" is a function which returns value for all inputs.
--- A "partial function" is a function which is not total; the return value for some inputs are not defined.
-
 
 -- Type of function
 -- CHECK the type of length, head, tail, (++), map, filter, reverse, concat, concatMap in the REPL.
@@ -49,6 +44,12 @@ a0 = length []
 a1 = length [1,2,3]
 a2 = length ['a','b','c']
 a3 = length "abc"
+
+
+-- The functions "head" and "tail" are considered to be "unsafe" functions because
+-- they are "partial functions", not "total functions".
+-- A "total function" is a function which returns value for all inputs.
+-- A "partial function" is a function which is not total; the return value for some inputs are not defined.
 
 --b0 = head []  -- This is error because nil has no head element.
 b1 = head [1,2,3]
