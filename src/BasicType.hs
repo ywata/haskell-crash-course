@@ -60,14 +60,18 @@ c1 :: Char        -- type
 c1 = 'あ'         -- Char supports unicode
 
 
--- RUN repl with cabal repl on top of project directory and type
+-- From this project's root directory, RUN repl with "cabal repl".
+-- Try the commands below and look at their output.
+-- If you receive an error on the first line, try "cabal v2-repl" instead.
 {-
+
 :m +BasicTypes
 i1
 i2
 :t i1
 :t i2
 1 + 2
+
 -}
 
 -- Slightly  complex type
