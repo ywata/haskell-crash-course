@@ -15,7 +15,8 @@ implement = undefined
 
 -- addition
 add 0 n = n
-add n m = 1 + add (n -1) m
+add n m = 1 + add (n -1) m -- n + m =
+-- add n m = 1 + add n (m - 1) does not work.
 
 -- multiplication
 mul 0 n = 0
@@ -24,9 +25,17 @@ mul n m = add m implement
 
 -- factorial
 fact :: Integer -> Integer
-fact n | n > 0 = n * fact (n -1)
+fact n = if n > 0 then n * fact (n -1)
+         else if n == 0 then 1
+              else 0
+
+
+fact' :: Integer -> Integer
+fact' n | n > 0 = n * fact (n -1)
        | n == 0 = 1
        | otherwise = 0
+
+
 
 -- Ackerman function
 ack :: Integer -> Integer -> Integer
