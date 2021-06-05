@@ -59,9 +59,10 @@ alice, bob :: Student
 alice = Student "Alice" 1900 Physics Nothing
 bob = Student{
   name = "Bob"
-  , birthYear = 1901
+  , secondMajor = Just History
   , major = Physics
-  , secondMajor = Just History}
+  , birthYear = 1901
+  }
 
 -- Field name is a function. name :: Student -> String
 nameBob  = name bob
