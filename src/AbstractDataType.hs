@@ -67,7 +67,7 @@ bob = Student{
 -- Field name is a function. name :: Student -> String
 nameBob  = name bob
 majorBob = major bob
---alice' = alice{secondMajor = ComputerScience}
+alice' = alice{secondMajor = Just ComputerScience}
 
 -- Function using ADT.
 
