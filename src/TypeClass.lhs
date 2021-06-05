@@ -7,6 +7,12 @@ I wonder I cover this as crash cource.
 Type class sounds like a class in Java but it actually not.
 It is much similar to interface in Java. Do not confuse it.
 
+As type class is like interface, it will be easier for you to consider the purpose of the class.
+Especially, Monad sounds like mysterious and some people (including me) try to understand the
+meaning of Monad but it is useless for programer because we are not mathematician.
+I recommend for you to understand Monad as a interface with several method (with some property).
+That will be enough to program Haskell code in the first place.
+
 To define class (or interface in Java) you use class keyword.
 class is a attribute of type. To provide implementation of a class (or interface in Java)
 you have to instanciate class to the data type.
@@ -14,6 +20,11 @@ you have to instanciate class to the data type.
 The meaning of the below code is
 If a data type `a' has Show property, you can use show method associated to `a'.
 You can show the type.
+
+Purpose of Show class:
+- to preset a representation of value of a class
+Property of Show class:
+- if the class provides Read interface, read . show = id
 
 > class Show a where
 >   show :: a -> String
@@ -33,11 +44,19 @@ important concept.
 
 Eq is used to decide equality of value of data type `a'.
 
+Purpose of Eq class:
+- to decide equality of a value.
+Property of Eq class:
+- The author is not sure.
+
 > class Eq a where
 >   (==) :: a -> a -> Bool -- Eq provides a way to decide equality between values of a SAME type.
 
 
-Ord is used to decide order of value.
+Purpose of Ord class:
+- to compare a order of two values.
+Property of Ord class:
+- The class must have an instance of Eq.
 
 > data Ordering = LT | EQ | GT
 > class (Eq a) => Ord a where  -- Ord requires a to be Eq. To define Ord a, you need a tobe Eq a.
@@ -48,6 +67,10 @@ Semigroup is an abstraction of Int, List, etc. Many structure can be Semigroup.
 The most important method defined in Semigroup is (<>). (<>) is an operator for Semigroup.
 (<>) should satisfy a property to be Semigroup.
 
+Purpose of Semigroup class:
+- to provide a binary operation on a type
+Property of Semigroup class:
+- The defined operator is associative.
 
 > class Semigroup a where
 >   -- infixr 6 : right associative
@@ -105,6 +128,10 @@ You can think of List as Semigroup.
 > l2' = "ab" <> "c"
 
 
+Purpose of Monoid class:
+- to provide a binary operation and a neutral element
+Property of Monid class:
+- The defined operator is associative and the neutral element is neutral to the operation.
 
 > class (Semigroup a) => Monoid a where
 
