@@ -147,14 +147,14 @@ wiredMap' f xs = case xs of
 -- You might think you can implement wiredMap with if then else.
 -- Yes, it is but it requires extra stuff and will be discussed later.
 
-                                                   
+
 -- You can implement wiredMap using guard syntax. This require length function.
 wiredMap''' :: (a -> b) -> List a -> List b
 wiredMap''' f xs
   | length xs <= 2 = Nil
   -- otherwise is just True.
   | otherwise      = implement
-                              
+
 
 -- Recursive function acts as loop
 sumInt :: List Int -> Int
