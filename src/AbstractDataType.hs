@@ -94,9 +94,17 @@ _     || _     = True
 -- maybe convert a value of (Maybe a) in two way.
 -- If Nothing, fixed value of type b (or default value) is returned
 -- If (Just a),  convert a value of type a with a function
+-- GUESS how you implement maybe. It's like a puzzele.
 maybe :: b -> (a -> b) -> Maybe a -> b
+
+
+-- Even though a and b are any type, maybe is implementable.
 maybe defaultValue function Nothing      = defaultValue -- function is not referenced it can be _
 maybe defaultValue function (Just value) = function value -- Extracting value from (Just value) Nice!
+
+-- How about this?
+bad :: a -> b
+bad = undefined
 
 d1, d2 :: String
 d1 = maybe "" id Nothing
