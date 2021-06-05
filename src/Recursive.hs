@@ -49,7 +49,7 @@ data List a = Nil | Cons a (List a) -- Theses are essentially correspond to [] a
 
 -- You normally need recursive function to manipulate recursive data.
 a0 :: a -> List a -> List a
-a0 v vs = Cons v vs
+a0 = Cons
 
 length :: List a -> Int
 --      +--------------------+
