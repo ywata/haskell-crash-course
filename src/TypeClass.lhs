@@ -39,8 +39,9 @@ You have to instanciate Show class for Bool in the following way.
 
 Prelude defines several type classes it includes:
 Eq, Ord, Num, Monoid, Functor, Applicative, Monad
+
 Note: The explanations here are not exact same as the definition in Prelude to show
-important concept.
+important type classes.
 
 Eq is used to decide equality of value of data type `a'.
 
