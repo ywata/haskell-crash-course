@@ -18,7 +18,7 @@ implement = undefined
 
 -- addition
 add 0 n = n
-add n m = 1 + add (n -1) m -- n + m =
+add n m = 1 + add (n -1) m -- n + m = 1 + (n - 1) + m
 -- add n m = 1 + add n (m - 1) does not work.
 
 -- multiplication
@@ -38,8 +38,6 @@ fact' n | n > 0 = n * fact (n -1)
        | n == 0 = 1
        | otherwise = 0
 
-
-
 -- Ackerman function
 ack :: Integer -> Integer -> Integer
 ack 0 n = n + 1
@@ -47,6 +45,7 @@ ack m 0 = ack (m -1) 1
 ack m n = ack (m -1) (ack m (n-1))
 
 data List a = Nil | Cons a (List a) -- Theses are essentially correspond to [] and [a]
+            deriving(Show)
 -- List a appears in Cons case. AST can express resursive structure.
 
 
@@ -177,11 +176,13 @@ insert :: Ord a => Tree a -> a -> Tree a
 insert Leaf a = Branch Leaf a Leaf
 insert (Branch left a right) b = if b <= a then Branch (insert left b) a right else Branch left a (insert right b)
 
+
 t1, t2, t3 :: Tree Int
 t1 = insert Leaf 100
 t2 = insert t1 200
 t3 = insert t2 50
 t4 = insert t3 75
+t5 = insert t4 250
 
 isInTree :: Ord a => a -> Tree a -> Bool
 isInTree val Leaf = False
@@ -199,11 +200,27 @@ isInTree' (Branch left a right) val =
     if val < a then isInTree val left
     else isInTree val right
 
+
 -- The difference between isInTree and isInTree' is order of argument.
 -- Order of inputs are a bit important.
-
---
 diff :: Bool
 diff = 2 `isInTree` t4
 mightBeUseful :: List Bool
 mightBeUseful = map (`isInTree` t3) (Cons 1 (Cons 2 (Cons 3 Nil)))
+
+
+-- flatten is sort if the input is ordered
+flatten :: Tree a -> List a
+flatten Leaf = Nil
+flatten (Branch l v r) = flatten l  ++ ((Cons v Nil) ++ flatten r )
+
+-- swapLeaf is artifical example
+-- If (Branch Leaf a (Branch _ _ _)) are found, rearrange to (Branch (Branch _ _ _) a Leaf)
+-- Even if input tree is ordered, the results is no longer ordered.
+-- The point of this is @-pattern.
+swapBottom :: Tree a -> Tree a
+swapBottom Leaf = Leaf
+swapBottom (Branch Leaf a b@(Branch _ _ _)) = Branch b a Leaf
+swapBottom (Branch l v r) = Branch (swapBottom l) v (swapBottom r)
+
+
