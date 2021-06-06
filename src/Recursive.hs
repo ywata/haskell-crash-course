@@ -1,13 +1,10 @@
 module Recursive where
 
 import Prelude (
-  Int, Bool(..)
+  Int, Bool
   , Integer
   , Num(..)
   , Maybe(..)
-  , Ord(..)
-  , Ordering(..)
-  , Show
   , otherwise
   , undefined
   , (<=), (>), (==)
@@ -18,8 +15,7 @@ implement = undefined
 
 -- addition
 add 0 n = n
-add n m = 1 + add (n -1) m -- n + m =
--- add n m = 1 + add n (m - 1) does not work.
+add n m = 1 + add (n -1) m
 
 -- multiplication
 mul 0 n = 0
@@ -28,17 +24,9 @@ mul n m = add m implement
 
 -- factorial
 fact :: Integer -> Integer
-fact n = if n > 0 then n * fact (n -1)
-         else if n == 0 then 1
-              else 0
-
-
-fact' :: Integer -> Integer
-fact' n | n > 0 = n * fact (n -1)
+fact n | n > 0 = n * fact (n -1)
        | n == 0 = 1
        | otherwise = 0
-
-
 
 -- Ackerman function
 ack :: Integer -> Integer -> Integer
@@ -150,14 +138,14 @@ wiredMap' f xs = case xs of
 -- You might think you can implement wiredMap with if then else.
 -- Yes, it is but it requires extra stuff and will be discussed later.
 
-
+                                                   
 -- You can implement wiredMap using guard syntax. This require length function.
 wiredMap''' :: (a -> b) -> List a -> List b
 wiredMap''' f xs
   | length xs <= 2 = Nil
   -- otherwise is just True.
   | otherwise      = implement
-
+                              
 
 -- Recursive function acts as loop
 sumInt :: List Int -> Int
@@ -166,44 +154,4 @@ sumInt (Cons x xs) = x + sumInt xs
 b0 = sumInt Nil
 b1 = sumInt (Cons 1 (Cons 2 (Cons 3 (Cons 4 Nil))))
 
-
-
--- More about recursive data and recursive function
-data Tree a = Leaf
-            | Branch (Tree a) a (Tree a)
-            deriving(Show)
-
-insert :: Ord a => Tree a -> a -> Tree a
-insert Leaf a = Branch Leaf a Leaf
-insert (Branch left a right) b = if b <= a then Branch (insert left b) a right else Branch left a (insert right b)
-
-t1, t2, t3 :: Tree Int
-t1 = insert Leaf 100
-t2 = insert t1 200
-t3 = insert t2 50
-t4 = insert t3 75
-
-isInTree :: Ord a => a -> Tree a -> Bool
-isInTree val Leaf = False
-isInTree val (Branch left a right)  =
-  if a == val then True
-  else
-    if val < a then isInTree val left
-    else isInTree val right
-
-isInTree' :: Ord a => Tree a -> a -> Bool
-isInTree' Leaf val = False
-isInTree' (Branch left a right) val =
-  if a == val then True
-  else
-    if val < a then isInTree val left
-    else isInTree val right
-
--- The difference between isInTree and isInTree' is order of argument.
--- Order of inputs are a bit important.
-
 --
-diff :: Bool
-diff = 2 `isInTree` t4
-mightBeUseful :: List Bool
-mightBeUseful = map (`isInTree` t3) (Cons 1 (Cons 2 (Cons 3 Nil)))
