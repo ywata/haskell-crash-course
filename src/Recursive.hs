@@ -25,7 +25,13 @@ mul n m = add m implement
 
 -- factorial
 fact :: Integer -> Integer
-fact n | n > 0 = n * fact (n -1)
+fact n = if n > 0 then n * fact (n -1)
+         else if n == 0 then 1
+              else 0
+
+
+fact' :: Integer -> Integer
+fact' n | n > 0 = n * fact (n -1)
        | n == 0 = 1
        | otherwise = 0
 
