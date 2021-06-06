@@ -38,7 +38,7 @@ You have to instanciate Show class for Bool in the following way.
 >   show True = "True"
 
 Prelude defines several type classes it includes:
-Eq, Ord, Num, Monoid, Functor, Applicative,
+Eq, Ord, Num, Monoid, Functor, Applicative, Monad
 Note: The explanations here are not exact same as the definition in Prelude to show
 important concept.
 
@@ -276,3 +276,6 @@ should consider them if they represent mathematical structure like Semigroup, Mo
 Mentioning all the implicit constraints for each type class is good.
 
 
+class (Applicative m) => Monad m where
+  return :: a -> m a -- pure
+  (>>=) :: m a -> (a -> m b) -> m b
