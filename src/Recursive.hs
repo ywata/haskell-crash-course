@@ -15,7 +15,8 @@ implement = undefined
 
 -- addition
 add 0 n = n
-add n m = 1 + add (n -1) m
+add n m = 1 + add (n -1) m -- n + m = 1 + (n - 1) + m
+-- add n m = 1 + add n (m - 1) does not work.
 
 -- multiplication
 mul 0 n = 0
