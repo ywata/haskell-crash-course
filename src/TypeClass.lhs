@@ -1,6 +1,6 @@
 
 > module TypeClass where
-> import Prelude (String, Integer, Num((+), (*)), (++), Char)
+> import Prelude (String, Integer, Num((+), (*)), (++), Maybe(..), Char, map, id, (++))
 
 I wonder I cover this as crash cource.
 
@@ -200,14 +200,61 @@ Functor is relatively easier to understand by thinkig it as a container.
 fmap apply transformation.
 
 
+Purpose of Functor class:
+- apply a function in a structure
+Property of Functor class:
+- application should be composable
+
+
 > class Functor f where
 >   fmap :: (a -> b) -> f a -> f b
+>
+> instance Functor Maybe where
+>   fmap _ Nothing = Nothing
+>   fmap f (Just a) = Just (f a)
+>
+> instance Functor [] where
+> -- fmap f xs = map f xs
+> -- fmap f    = map f
+>    fmap      = map
+> m1  = fmap id [1,2,3]
+> m1' = map  id [1,2,3]
 
-Applicative
+
+Purpose of Functor class:
+- apply a function in a structure multiple times
+Property of Functor class:
+- application should be composable
 
 > class (Functor f) => Applicative f where
->   pure :: a -> f a
+>   pure :: a -> f a                  -- lift value(including function)
 >   (<*>) :: f (a -> b) -> f a -> f b
+>
+> instance Applicative Maybe where
+>   pure a = Just a
+>   (<*>) Nothing _         = Nothing
+>   (<*>) _ Nothing         = Nothing
+>   (<*>) (Just f) (Just v) = Just (f v)
+>
+> instance Applicative [] where
+>   pure a = [a]
+>   (<*>) [] xs = []
+>   (<*>) (f : fs) xs = map f xs ++ (<*>) fs  xs
+
+
+What is nice about Applicative as compared to Functor is an ability to sequence funtion applications.
+
+fmap :: (a -> b) -> Maybe a -> Maybe b
+
+> fct1 :: Num a => Maybe (a -> a)
+> fct1 = fmap (\x y -> x + y) (Just 1)      -- structure is changed
+
+(<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
+
+> apl1 :: Num a => Maybe (a -> a)           -- structure is same after application
+> apl1 = (pure (\x y -> x + y)) <*> (Just 1)
+> apl2 :: Num a => Maybe a                  -- You can apply again.
+> apl2 = apl1 <*> (Just 2)
 
 
 Side note:
