@@ -17,6 +17,7 @@ import Prelude (
 implement = undefined
 
 -- addition
+-- Recursive function can act like loop. Loop by the first argument.
 add 0 n = n
 add n m = 1 + add (n -1) m -- n + m = 1 + (n - 1) + m
 -- add n m = 1 + add n (m - 1) does not work.
