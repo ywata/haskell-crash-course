@@ -1,6 +1,6 @@
 
 > module TypeClass where
-> import Prelude (String, Integer, Num((+), (*)), (++), Maybe(..), Char, map, id, (++))
+> import Prelude (String, Integer, Num((+), (*)), (++), Maybe(..), Char, map, concatMap,  id, mod, (++))
 
 I wonder I cover this as crash cource.
 
@@ -263,25 +263,73 @@ fmap :: (a -> b) -> Maybe a -> Maybe b
 > api2''' = (+)                    <$> (Just 1) <*> (Just 2)
 
 
-Side note:
-I'm wondering what I show and how I explain type class in this part.
-Especially, explainig Functor Applicative and Monad in this section affects
-how I explain IO. It is possible to show IO without such information and
-presenting abstract information may harm understanding IO.
-
-Another consideration is even if I do not mention Functor/Applicative/Monad,
-there are many important type class defined in Haskell.
-Those includes:
-Read, Show, Eq, Ord, Enum
-Mention deriving in this section
-
-Type class is very similar to interface in Java. In many situation, aditional implicit
-constraints are observed. Those are not explicitly presented in source code but author of type class
-should consider them if they represent mathematical structure like Semigroup, Monoid.
-
-Mentioning all the implicit constraints for each type class is good.
+Suppose we have a function with two arguments and x :: a, y ::b.
+g   ::     a    ->   b   -> c
+You can call the function and use the function for Applicative f.
+g          x     y ::   c
+g      <$> x <*> y :: f c
+pure g <*> x <*> y :: f c
 
 
-class (Applicative m) => Monad m where
-  return :: a -> m a -- pure
-  (>>=) :: m a -> (a -> m b) -> m b
+
+
+Finally, we can dive into Monad.
+Applicative has more capability than Functor and Monad has more capability than Monad.
+What is the capability?
+
+
+> class (Applicative m) => Monad m where
+>   return :: a -> m a -- pure
+>   (>>=) :: m a -> (a -> m b) -> m b
+>
+> instance Monad Maybe where
+>   return = pure
+>   Just a >>= f = f a
+>   Nothing >>= f = Nothing
+>
+> instance Monad [] where
+>   return = pure
+>   xs >>= f = concatMap f xs
+> 
+> n1 = Just 3 >>= (\x -> return (2 * x))
+> n2 = Nothing >>= (\x -> return (2 * x))
+
+The key of the above question is the type. Though the notation is not legal Haskell but
+Flipping <*> makes easier to understand the difference. As pure and return are same,
+composition is the key.
+
+                       +------- Applicative
+                       |         +----------- Non applicative type
+                       |         |
+                       v         v
+(flip <*>) :: f a  ->  f (a  ->  b)    -> f b  --- Applicative composition
+(>>=)      :: m a ->     (a -> m b)    -> m b  --- Monadic composition
+                       ^       ^          ^
+                       |       |          |
+                       |       +--------------- Monad with same type
+                       +------- Second argument of (>>=) is not Monad
+Applicative style
+
+> n3' = (\x -> case x of
+>                     3 -> (-1)
+>                     k -> k) <$> (Just 3)
+
+Monadic style
+
+> n3 = Just 3 >>= (\x -> case x of
+>                     3 -> return (-1)
+>                     k -> return k)
+
+Other than monadic version uses return, The above two look same. As using return suggests, other than return something is also allowed.
+
+> n4 = Just 4 >>= (\x -> case x of
+>                     3 -> return (-1)
+>                     k -> Nothing)
+
+This is impssible with Applicative but possible with Monad. This is the key of Monad.
+
+
+
+
+
+
