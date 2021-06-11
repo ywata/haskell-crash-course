@@ -230,6 +230,8 @@ Property of Functor class:
 > class (Functor f) => Applicative f where
 >   pure :: a -> f a                  -- lift value(including function)
 >   (<*>) :: f (a -> b) -> f a -> f b
+>   (<$>) :: (a -> b) -> f a -> f b
+>   (<$>) f = (<*>) (pure f)
 >
 > instance Applicative Maybe where
 >   pure a = Just a
@@ -254,8 +256,11 @@ fmap :: (a -> b) -> Maybe a -> Maybe b
 
 > apl1 :: Num a => Maybe (a -> a)           -- structure is same after application
 > apl1 = (pure (\x y -> x + y)) <*> (Just 1)
-> apl2 :: Num a => Maybe a                  -- You can apply again.
-> apl2 = apl1 <*> (Just 2)
+> apl2, api2', api2'', api2''' :: Num a => Maybe a                  -- You can apply again.
+> apl2    = apl1                                <*> (Just 2)
+> api2'   = (pure (\x y -> x + y)) <*> (Just 1) <*> (Just 2)
+> api2''  = (\x y -> x + y)        <$> (Just 1) <*> (Just 2)
+> api2''' = (+)                    <$> (Just 1) <*> (Just 2)
 
 
 Side note:
