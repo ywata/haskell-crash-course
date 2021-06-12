@@ -204,7 +204,10 @@ fmap apply transformation.
 Purpose of Functor class:
 - apply a function in a structure
 Property of Functor class:
-- application should be composable
+- Functor laws
+  fmap id = id                     -- identity
+  fmap (f . g) = fmap f . fmap g   -- composition
+
 
 
 > class Functor f where
@@ -225,7 +228,11 @@ Property of Functor class:
 Purpose of Functor class:
 - apply a function in a structure multiple times
 Property of Functor class:
-- application should be composable
+- Applicative laws
+  pure id <*> v              = v                 -- identity
+  pure (.) <*> u <*> v <*> w = u <*> (v <*> w)   -- composition
+  pure f <*> pure x          = pure (f x)        --
+  u <*> pure y               = pure ($ y) <*> u  -- 
 
 > class (Functor f) => Applicative f where
 >   pure :: a -> f a                  -- lift value(including function)
@@ -274,9 +281,17 @@ pure g <*> x <*> y :: f c
 
 
 Finally, we can dive into Monad.
-Applicative has more capability than Functor and Monad has more capability than Monad.
+Applicative has more capability than Functor and Monad has more capability than Applicative.
 What is the capability?
 
+Purpose of Monad class:
+ Monad class provide a way to encode computation.
+
+Property of Monad class:
+ Monadic laws
+ return a   >>= h          = h a              -- unit
+ m          >>= return     = m                -- unit
+ (m >== g)  >>= h          = m >>= (g >>= h)  -- composition of monad by >>=
 
 > class (Applicative m) => Monad m where
 >   return :: a -> m a -- pure
