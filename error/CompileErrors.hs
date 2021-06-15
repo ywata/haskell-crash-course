@@ -60,3 +60,9 @@ instance (Semigroup a) => Monoid (Ext a) where
   mappend Neutral      a             = a
   mappend a            Neutral       = a
   mappend (Original a) (Original b) = Original (a <> b)
+
+-- hole is important feature of GHC to know type.
+
+a12 :: String
+a12 = map _ [1,2,3]
+

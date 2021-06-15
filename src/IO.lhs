@@ -41,6 +41,9 @@ fmap f fa = do
               m <- fa
               return (f m)
 
+Haskell has a special syntax sugar
+for Monad. It's called do-notation. Do notation makes bind sequence looks imperative programming.
+
 > fmap1, fmap1' :: IO([Char])
 > fmap1 = fmap (:[]) getChar
 > fmap1' = do
@@ -83,4 +86,24 @@ m (>>=) f   = do
 >         input <- getChar
 >         putChar input
 
+Another important syntax sugar is let in do block.
+
+> let1, let1' :: IO()
+> let1 = do
+>   let abc = map id ['a', 'b', 'c']
+>       efg = map id ['e', 'f', 'g']
+>   putStr "input a character:"
+>   ch <- getChar
+>   let v = if ch == 'a' then abc else efg
+>   putStr v
+>
+> let1' =
+>   let abc = map id ['a', 'b', 'c']
+>       efg = map id ['e', 'f', 'g']
+>   in
+>     putStr "Input a character:" >>= \_ -> getChar
+>       >>= \ch -> return (if ch == 'a' then abc else efg)
+>       >>= \v -> putStr v
+>       >>= \_ -> return ()
+>
 
