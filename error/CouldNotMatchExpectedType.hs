@@ -1,6 +1,6 @@
 module CouldNotMatchExpectedType where
 
-import Prelude(Int, String, ([]))
+import Prelude(Int, String, Double, Float, Num(..), (+), (++), map, const)
 
 cnm001 :: Int
 cnm001 = "1"
@@ -31,5 +31,14 @@ cnm007 = (1, 2)
 
 cnm008 :: [Int]
 cnm008 = map (const ()) []
+
+cnm009::String -> Int
+cnm009 x = x + x
+
+cnm010 :: String -> Int
+cnm010 x = x ++ x
+
+cnm011 :: Num a => a -> String
+cnm011 x = x
 
 

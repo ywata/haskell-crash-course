@@ -1,4 +1,11 @@
 module NoInstanceFor where
 
-nif001 ::  Int -> Int
-a006 = 6
+import Prelude (String, Int, (+), (++), Monoid(..), (<>))
+
+nif001 :: Int -> Int
+nif001 x = x <> x
+
+
+
+
+
