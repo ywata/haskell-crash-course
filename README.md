@@ -26,10 +26,13 @@ In this material, the author plants to cover basic functionality of Haskell, whi
     * ADT (Abstract Data Type)
     * Pattern match
     * Compile error (~= type error)
+	* Recursive data type
+	* Type class
 * Functions
     * Recursive function
     * Composition of functions and higher order functions
-* Unit Tests
 * IO
+* Unit Tests
+
 
 As type and functions are interrelated, the order of the subjects presented is different from the above.
