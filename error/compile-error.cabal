@@ -20,11 +20,15 @@ maintainer:         ywataywatay@gmail.com
 -- category:
 --extra-source-files: CHANGELOG.md
 
-library errors
+library error
 
     -- Modules included in this executable, other than Main.
     other-modules:
-        CompileError
+        CouldNotMatchExpected
+      , Hole
+      , NoInstanceFor
+      , NotInScope
+      , VariableNotInScope
 
 
     -- LANGUAGE extensions used by modules in this package.
