@@ -192,7 +192,7 @@ Though it does not make much sense, you can make any Semigroup into extended Mon
         |      |           |   |
         v      v           v   v
 
-class (C1   a, C2    a) AClass a where
+class (C1   a, C2    a) => AClass a where
   method :: a -> a
 Monoid's case Semigroup is the only constraint.
 
