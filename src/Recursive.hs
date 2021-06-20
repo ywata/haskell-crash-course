@@ -164,6 +164,33 @@ weirdMap''' f xs
   | otherwise      = implement
 
 
+-- It is possible to define natural number (integer greater than or equal to 0)
+-- with the following two things, Z and S.
+-- Z corresponds to 0
+-- S corresponds to (1 +), increment by 1 function.
+-- S is not any value of natural number but a function returns successor value of the argument.
+data Nat = Z | S Nat
+  deriving(Show)
+--So, S Z is 1
+--    S (S Z) is 2
+--    S (S (S Z) is 3 and so on.
+
+addNat :: Nat -> Nat -> Nat
+addNat Z n = n
+addNat (S m) n = implement
+
+mulNat :: Nat -> Nat -> Nat
+mulNat Z n = Z
+mulNat (S m) n = implement
+
+-- As we implement Natural number, you can implement length function.
+-- Advanced:
+-- There are some test examples in haskell-crash-course/test, you can use them for your test.
+lengthNat :: List a -> Nat
+lengthNat Nil         = Z
+lengthNat (Cons x xs) = implement
+
+
 -- Recursive function acts as loop
 sumInt :: List Int -> Int
 sumInt Nil = 0
