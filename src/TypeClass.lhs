@@ -1,6 +1,6 @@
 
 > module TypeClass where
-> import Prelude (String, Integer, Num((+), (*)), (++), Maybe(..), Char, map, concatMap,  id, mod, (++))
+> import Prelude (String, Integer, Num(..), (++), Maybe(..), Char, map, concatMap,  id, mod, (++))
 
 I wonder I cover this as crash cource.
 
@@ -104,11 +104,20 @@ instance Semigroup Integer where
 There is a workaround for this. It requires wrapping original type with newtype.
 
 > newtype Integer' = I Integer
+> --instance Num Integer' where
+> instance Num Integer' where
+>   I a + I b = I (a + b)
+>   I a * I b = I (a * b)
+>   abs (I a) = I (abs a)
+>   signum (I a) = I (signum a)
+>   fromInteger a = I a
+>   negate (I a) = I (negate a)
+> 
 > instance Semigroup Integer' where
 >   (I m) <> (I n) = I (m * n)
 
 In the above instanciation, m and n is Integer and (I m) (I n) and I(m * n) are Integer'.
-A bit annoying.
+bit annoying.
 
 > j1 :: Integer -- the type is Integer not Integer'
 > j1 = 3 * 4
