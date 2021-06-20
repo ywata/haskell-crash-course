@@ -205,7 +205,7 @@ Monoid's case Semigroup is the only constraint.
 
 
 Functor is relatively easier to understand by thinkig it as a container.
-fmap apply transformation.
+fmap apply transformation of contents inside the container.
 
 
 Purpose of Functor class:
@@ -222,7 +222,7 @@ Property of Functor class:
 >
 > instance Functor Maybe where
 >   fmap _ Nothing = Nothing
->   fmap f (Just a) = Just (f a)
+>   fmap f (Just a) = Just (f a)  -- You can think of a in (Maybe a) as content in container.
 >
 > instance Functor [] where
 > -- fmap f xs = map f xs
