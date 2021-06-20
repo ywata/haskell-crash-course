@@ -172,17 +172,6 @@ Making Integer, Integer' and [a] Monoid.
 >   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
 
 
-Though it does not make much sense, you can make any Semigroup into extended Monoid.
-
-> data Ext a = Original a | Neutral
-> instance (Semigroup a) => Semigroup (Ext a) where
->   (Original a) <> Neutral = Original a
->   Neutral <> (Original a) = Original a
->   (Original a) <> (Original b) = Original (a <> b)
->
-> instance (Semigroup a) => Monoid (Ext a) where
->   mempty = Neutral
->   mappend = (<>)
 
         +------------- Constraints for a
         |      +------ Constraints for a
