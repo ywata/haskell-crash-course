@@ -143,6 +143,10 @@ Property of Monid class:
 >   mempty :: a            -- It looks mempty is a function but it's a neutral value in Monoid.
 >   mappend :: a -> a -> a -- = (<>)
 
+As the name of the methods of Monoid suggests, it models String.
+mempty is the empty String "" and mappend is append or concatenation of String.
+
+
 Behind the Monoid class, we have to assure
 mappend mempty m      == m                       -- mempty is neutral
 mappend m      mempty == m                       -- in this sense.
@@ -152,25 +156,30 @@ mappend l (mappend m n) == mappend (mappend l m) n  -- this comes from Semigroup
 You saw:
 class (Semigroup a) => Monoid a where
 This means, if type a is a Monoid, a is also Semigroup but the converse is not hold.
-I.e, even if a is Smigroup, it is normally not Monoid. This is what => means.
-Int can be Monoid with respect to addition and multiplication.
-How can we make Int as Monoid for (+) and for (*)?
-You need newtype for this.
+I.e, even if a is a Smigroup, it is normally not Monoid. This is what => means.
 
-Making Integer, Integer' and [a] Monoid.
+As mentioned, String is an instance of Monoid.
 
-> instance Monoid Integer where
->   mempty = 0
->   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
->
-> instance Monoid Integer' where
->   mempty = I 1
->   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
 >
 > instance Monoid [a] where
 >   mempty = []
->   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
+>   mappend = (++) -- As Monoid is a Semigroup, you can also use (<>).
 
+Another example is Int
+Integer can be Monoid with respect to addition and multiplication.
+How can we make Int as Monoid for (+) and for (*)?
+You need newtype for this.
+
+Making Integer as Monoid with respect to addion and Integer' as Monoid with respect to multiplication.
+
+
+> instance Monoid Integer where
+>   mempty = 0
+>   mappend = (+) -- As Monoid is a Semigroup, you can refer (<>).
+>
+> instance Monoid Integer' where
+>   mempty = I 1
+>   mappend = (*) -- As Monoid is a Semigroup, you can refer (<>).
 
 
         +------------- Constraints for a
