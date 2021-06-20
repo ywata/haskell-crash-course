@@ -292,7 +292,7 @@ Applicative has more capability than Functor and Monad has more capability than 
 What is the capability?
 
 Purpose of Monad class:
- Monad class provide a way to encode computation.
+- Monad class provide a way to encapsulate computation.
 
 Property of Monad class:
  Monadic laws
