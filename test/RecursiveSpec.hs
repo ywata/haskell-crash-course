@@ -22,7 +22,8 @@ spec = do
   -- Property test examples.
   describe "Integer and Nat" $ do 
     prop "S is inc" $ (\n -> (intToNat . natToInt) n === n)
-  
+
+{- -- This is comment outed intentionally because this require some implementation in Recursive.hs
   describe "length and lengthNat is equivalent" $ do
     prop "for any List xs, length xs = natToInt (lengthNat xs)"
       $ (\(xs :: List Int) -> length xs === natToInt (lengthNat xs) )
@@ -33,7 +34,9 @@ spec = do
     prop "mul and mulNat" $
       (\(x :: Nat) -> \(y ::Nat) -> natToInt(mulNat x y) === mul (natToInt x) (natToInt y))
     -- Is there a way to generalize the above two property test?
-      
+-}
+
+
 -- only defined for n >= 0
 intToNat :: Int -> Nat
 intToNat 0     = Z
