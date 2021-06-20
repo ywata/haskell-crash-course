@@ -67,5 +67,6 @@ test-suite haskell-crash-course-test
       haskell-crash-course
       , base ^>=4.14.1.0
       , hspec >= 2.7.0
+      QuickCheck >= 2.14.0
   build-tool-depends: hspec-discover:hspec-discover
   default-language: Haskell2010
