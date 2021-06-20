@@ -28,16 +28,20 @@ mul n m = add m implement
 
 
 -- factorial
+-- factorial is only properly defined for integer n >= 0.
 fact :: Integer -> Integer
-fact n = if n > 0 then n * fact (n -1)
+fact 0 = 1
+fact n = n * fact (n -1)
+
+fact' :: Integer -> Integer
+fact' n = if n > 0 then n * fact (n -1)
          else if n == 0 then 1
               else 0
 
-
-fact' :: Integer -> Integer
-fact' n | n > 0 = n * fact (n -1)
-       | n == 0 = 1
-       | otherwise = 0
+fact'' :: Integer -> Integer
+fact'' n | n > 0 = n * fact (n -1)
+        | n == 0 = 1
+        | otherwise = 0
 
 -- Ackerman function
 ack :: Integer -> Integer -> Integer
@@ -45,10 +49,11 @@ ack 0 n = n + 1
 ack m 0 = ack (m -1) 1
 ack m n = ack (m -1) (ack m (n-1))
 
+
+
 data List a = Nil | Cons a (List a) -- Theses are essentially correspond to [] and [a]
             deriving(Show)
 -- List a appears in Cons case. AST can express resursive structure.
-
 
 -- You normally need recursive function to manipulate recursive data.
 a0 :: a -> List a -> List a
