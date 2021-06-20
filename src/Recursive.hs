@@ -28,16 +28,20 @@ mul n m = add m implement
 
 
 -- factorial
+-- factorial is only properly defined for integer n >= 0.
 fact :: Integer -> Integer
-fact n = if n > 0 then n * fact (n -1)
+fact 0 = 1
+fact n = n * fact (n -1)
+
+fact' :: Integer -> Integer
+fact' n = if n > 0 then n * fact (n -1)
          else if n == 0 then 1
               else 0
 
-
-fact' :: Integer -> Integer
-fact' n | n > 0 = n * fact (n -1)
-       | n == 0 = 1
-       | otherwise = 0
+fact'' :: Integer -> Integer
+fact'' n | n > 0 = n * fact (n -1)
+        | n == 0 = 1
+        | otherwise = 0
 
 -- Ackerman function
 ack :: Integer -> Integer -> Integer
@@ -45,10 +49,11 @@ ack 0 n = n + 1
 ack m 0 = ack (m -1) 1
 ack m n = ack (m -1) (ack m (n-1))
 
+
+
 data List a = Nil | Cons a (List a) -- Theses are essentially correspond to [] and [a]
             deriving(Show)
 -- List a appears in Cons case. AST can express resursive structure.
-
 
 -- You normally need recursive function to manipulate recursive data.
 a0 :: a -> List a -> List a
@@ -127,22 +132,22 @@ filter p (Cons x xs) = if p x then implement else implement
 -- Wiered map
 -- wieredMap:: (a -> b) -> List a -> List b
 -- wieredMap returns Nil if the length of List is less than or equal to 2
-wiredMap :: (a -> b) -> List a -> List b
+weirdMap :: (a -> b) -> List a -> List b
 --                      ^^^^^^
 --                 List is ADT.
 --                 ADT is generally constructed with possibly multiple cases.
 --                 In this case Nil and Cons
 --                 It means, you need at least two cases if the function is trivial.
 --                 It does not mean two cases are enough for all purpose.
-wiredMap f Nil                   = implement
-wiredMap f (Cons x Nil)          = Nil -- Note pattern match works like this.
-wiredMap f (Cons x (Cons y Nil)) = Nil -- Arbitrary nesting can be pattern matched.
-wiredMap f _                     = implement
+weirdMap f Nil                   = implement
+weirdMap f (Cons x Nil)          = Nil -- Note pattern match works like this.
+weirdMap f (Cons x (Cons y Nil)) = Nil -- Arbitrary nesting can be pattern matched.
+weirdMap f _                     = implement
 
 
 -- You can implement wiredMap using case syntax
-wiredMap' :: (a -> b) -> List a -> List b
-wiredMap' f xs = case xs of
+weirdMap' :: (a -> b) -> List a -> List b
+weirdMap' f xs = case xs of
                    Nil                         -> Nil
                    Cons _ (Cons _ Nil)         -> Nil
                    Cons _ (Cons _ (Cons _ Nil)) -> Nil
@@ -152,11 +157,38 @@ wiredMap' f xs = case xs of
 
 
 -- You can implement wiredMap using guard syntax. This require length function.
-wiredMap''' :: (a -> b) -> List a -> List b
-wiredMap''' f xs
+weirdMap''' :: (a -> b) -> List a -> List b
+weirdMap''' f xs
   | length xs <= 2 = Nil
   -- otherwise is just True.
   | otherwise      = implement
+
+
+-- It is possible to define natural number (integer greater than or equal to 0)
+-- with the following two things, Z and S.
+-- Z corresponds to 0
+-- S corresponds to (1 +), increment by 1 function.
+-- S is not any value of natural number but a function returns successor value of the argument.
+data Nat = Z | S Nat
+  deriving(Show)
+--So, S Z is 1
+--    S (S Z) is 2
+--    S (S (S Z) is 3 and so on.
+
+addNat :: Nat -> Nat -> Nat
+addNat Z n = n
+addNat (S m) n = implement
+
+mulNat :: Nat -> Nat -> Nat
+mulNat Z n = Z
+mulNat (S m) n = implement
+
+-- As we implement Natural number, you can implement length function.
+-- Advanced:
+-- There are some test examples in haskell-crash-course/test, you can use them for your test.
+lengthNat :: List a -> Nat
+lengthNat Nil         = Z
+lengthNat (Cons x xs) = implement
 
 
 -- Recursive function acts as loop

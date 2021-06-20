@@ -1,6 +1,6 @@
 
 > module TypeClass where
-> import Prelude (String, Integer, Num((+), (*)), (++), Maybe(..), Char, map, concatMap,  id, mod, (++))
+> import Prelude (String, Integer, Num(..), (++), Maybe(..), Char, map, concatMap,  id, mod, (++))
 
 I wonder I cover this as crash cource.
 
@@ -104,11 +104,20 @@ instance Semigroup Integer where
 There is a workaround for this. It requires wrapping original type with newtype.
 
 > newtype Integer' = I Integer
+> --instance Num Integer' where
+> instance Num Integer' where
+>   I a + I b = I (a + b)
+>   I a * I b = I (a * b)
+>   abs (I a) = I (abs a)
+>   signum (I a) = I (signum a)
+>   fromInteger a = I a
+>   negate (I a) = I (negate a)
+> 
 > instance Semigroup Integer' where
 >   (I m) <> (I n) = I (m * n)
 
 In the above instanciation, m and n is Integer and (I m) (I n) and I(m * n) are Integer'.
-A bit annoying.
+bit annoying.
 
 > j1 :: Integer -- the type is Integer not Integer'
 > j1 = 3 * 4
@@ -143,6 +152,10 @@ Property of Monid class:
 >   mempty :: a            -- It looks mempty is a function but it's a neutral value in Monoid.
 >   mappend :: a -> a -> a -- = (<>)
 
+As the name of the methods of Monoid suggests, it models String.
+mempty is the empty String "" and mappend is append or concatenation of String.
+
+
 Behind the Monoid class, we have to assure
 mappend mempty m      == m                       -- mempty is neutral
 mappend m      mempty == m                       -- in this sense.
@@ -152,37 +165,31 @@ mappend l (mappend m n) == mappend (mappend l m) n  -- this comes from Semigroup
 You saw:
 class (Semigroup a) => Monoid a where
 This means, if type a is a Monoid, a is also Semigroup but the converse is not hold.
-I.e, even if a is Smigroup, it is normally not Monoid. This is what => means.
-Int can be Monoid with respect to addition and multiplication.
-How can we make Int as Monoid for (+) and for (*)?
-You need newtype for this.
+I.e, even if a is a Smigroup, it is normally not Monoid. This is what => means.
 
-Making Integer, Integer' and [a] Monoid.
+As mentioned, String is an instance of Monoid.
 
-> instance Monoid Integer where
->   mempty = 0
->   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
->
-> instance Monoid Integer' where
->   mempty = I 1
->   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
 >
 > instance Monoid [a] where
 >   mempty = []
->   mappend = (<>) -- As Monoid is a Semigroup, you can refer (<>).
+>   mappend = (++) -- As Monoid is a Semigroup, you can also use (<>).
+
+Another example is Int
+Integer can be Monoid with respect to addition and multiplication.
+How can we make Int as Monoid for (+) and for (*)?
+You need newtype for this.
+
+Making Integer as Monoid with respect to addion and Integer' as Monoid with respect to multiplication.
 
 
-Though it does not make much sense, you can make any Semigroup into extended Monoid.
-
-> data Ext a = Original a | Neutral
-> instance (Semigroup a) => Semigroup (Ext a) where
->   (Original a) <> Neutral = Original a
->   Neutral <> (Original a) = Original a
->   (Original a) <> (Original b) = Original (a <> b)
+> instance Monoid Integer where
+>   mempty = 0
+>   mappend = (+) -- As Monoid is a Semigroup, you can refer (<>).
 >
-> instance (Semigroup a) => Monoid (Ext a) where
->   mempty = Neutral
->   mappend = (<>)
+> instance Monoid Integer' where
+>   mempty = I 1
+>   mappend = (*) -- As Monoid is a Semigroup, you can refer (<>).
+
 
         +------------- Constraints for a
         |      +------ Constraints for a
@@ -192,13 +199,13 @@ Though it does not make much sense, you can make any Semigroup into extended Mon
         |      |           |   |
         v      v           v   v
 
-class (C1   a, C2    a) AClass a where
+class (C1   a, C2    a) => AClass a where
   method :: a -> a
 Monoid's case Semigroup is the only constraint.
 
 
 Functor is relatively easier to understand by thinkig it as a container.
-fmap apply transformation.
+fmap apply transformation of contents inside the container.
 
 
 Purpose of Functor class:
@@ -215,7 +222,7 @@ Property of Functor class:
 >
 > instance Functor Maybe where
 >   fmap _ Nothing = Nothing
->   fmap f (Just a) = Just (f a)
+>   fmap f (Just a) = Just (f a)  -- You can think of a in (Maybe a) as content in container.
 >
 > instance Functor [] where
 > -- fmap f xs = map f xs
@@ -257,12 +264,12 @@ What is nice about Applicative as compared to Functor is an ability to sequence 
 fmap :: (a -> b) -> Maybe a -> Maybe b
 
 > fct1 :: Num a => Maybe (a -> a)
-> fct1 = fmap (\x y -> x + y) (Just 1)      -- structure is changed
+> fct1 = fmap (\x y -> x + y) (Just 1)        -- structure is changed. 
 
 (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
 
-> apl1 :: Num a => Maybe (a -> a)           -- structure is same after application
-> apl1 = (pure (\x y -> x + y)) <*> (Just 1)
+> apl1 :: Num a => Maybe (a -> a)           
+> apl1 = (pure (\x y -> x + y)) <*> (Just 1)  -- structure is preserved. Both arguments are Maybe.
 > apl2, api2', api2'', api2''' :: Num a => Maybe a                  -- You can apply again.
 > apl2    = apl1                                <*> (Just 2)
 > api2'   = (pure (\x y -> x + y)) <*> (Just 1) <*> (Just 2)
@@ -285,7 +292,7 @@ Applicative has more capability than Functor and Monad has more capability than 
 What is the capability?
 
 Purpose of Monad class:
- Monad class provide a way to encode computation.
+- Monad class provide a way to encapsulate computation.
 
 Property of Monad class:
  Monadic laws
@@ -296,7 +303,11 @@ Property of Monad class:
 > class (Applicative m) => Monad m where
 >   return :: a -> m a -- pure
 >   (>>=) :: m a -> (a -> m b) -> m b
->
+
+             ^
+             |
+             +------ A Monad
+
 > instance Monad Maybe where
 >   return = pure
 >   Just a >>= f = f a
@@ -305,9 +316,13 @@ Property of Monad class:
 > instance Monad [] where
 >   return = pure
 >   xs >>= f = concatMap f xs
-> 
-> n1 = Just 3 >>= (\x -> return (2 * x))
-> n2 = Nothing >>= (\x -> return (2 * x))
+> n1, n1', n2, n3 :: Maybe Integer
+> n1  =  Just 3  >>= (\x -> return (2 * x))
+> n1' = return 3 >>= (\x -> return (2 * x))
+> n2  =  Nothing >>= (\x -> return (2 * x))
+> n3  = return 3 >>= (\_ -> Nothing)
+> n3'  = Nothing  >>= (\_ -> Nothing)
+
 
 The key of the above question is the type. Though the notation is not legal Haskell but
 Flipping <*> makes easier to understand the difference. As pure and return are same,
@@ -325,19 +340,19 @@ composition is the key.
                        +------- Second argument of (>>=) is not Monad
 Applicative style
 
-> n3' = (\x -> case x of
+> n4' = (\x -> case x of
 >                     3 -> (-1)
 >                     k -> k) <$> (Just 3)
 
 Monadic style
 
-> n3 = Just 3 >>= (\x -> case x of
+> n4 = Just 3 >>= (\x -> case x of
 >                     3 -> return (-1)
 >                     k -> return k)
 
 Other than monadic version uses return, The above two look same. As using return suggests, other than return something is also allowed.
 
-> n4 = Just 4 >>= (\x -> case x of
+> n5 = Just 4 >>= (\x -> case x of
 >                     3 -> return (-1)
 >                     k -> Nothing)
 
