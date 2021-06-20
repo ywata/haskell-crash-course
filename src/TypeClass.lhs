@@ -303,7 +303,11 @@ Property of Monad class:
 > class (Applicative m) => Monad m where
 >   return :: a -> m a -- pure
 >   (>>=) :: m a -> (a -> m b) -> m b
->
+
+             ^
+             |
+             +------ A Monad
+
 > instance Monad Maybe where
 >   return = pure
 >   Just a >>= f = f a
