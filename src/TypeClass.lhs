@@ -305,9 +305,13 @@ Property of Monad class:
 > instance Monad [] where
 >   return = pure
 >   xs >>= f = concatMap f xs
-> 
-> n1 = Just 3 >>= (\x -> return (2 * x))
-> n2 = Nothing >>= (\x -> return (2 * x))
+> n1, n1', n2, n3 :: Maybe Integer
+> n1  =  Just 3  >>= (\x -> return (2 * x))
+> n1' = return 3 >>= (\x -> return (2 * x))
+> n2  =  Nothing >>= (\x -> return (2 * x))
+> n3  = return 3 >>= (\_ -> Nothing)
+> n3'  = Nothing  >>= (\_ -> Nothing)
+
 
 The key of the above question is the type. Though the notation is not legal Haskell but
 Flipping <*> makes easier to understand the difference. As pure and return are same,
@@ -325,19 +329,19 @@ composition is the key.
                        +------- Second argument of (>>=) is not Monad
 Applicative style
 
-> n3' = (\x -> case x of
+> n4' = (\x -> case x of
 >                     3 -> (-1)
 >                     k -> k) <$> (Just 3)
 
 Monadic style
 
-> n3 = Just 3 >>= (\x -> case x of
+> n4 = Just 3 >>= (\x -> case x of
 >                     3 -> return (-1)
 >                     k -> return k)
 
 Other than monadic version uses return, The above two look same. As using return suggests, other than return something is also allowed.
 
-> n4 = Just 4 >>= (\x -> case x of
+> n5 = Just 4 >>= (\x -> case x of
 >                     3 -> return (-1)
 >                     k -> Nothing)
 
