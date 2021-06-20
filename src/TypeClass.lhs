@@ -264,12 +264,12 @@ What is nice about Applicative as compared to Functor is an ability to sequence 
 fmap :: (a -> b) -> Maybe a -> Maybe b
 
 > fct1 :: Num a => Maybe (a -> a)
-> fct1 = fmap (\x y -> x + y) (Just 1)      -- structure is changed
+> fct1 = fmap (\x y -> x + y) (Just 1)        -- structure is changed. 
 
 (<*>) :: Maybe (a -> b) -> Maybe a -> Maybe b
 
-> apl1 :: Num a => Maybe (a -> a)           -- structure is same after application
-> apl1 = (pure (\x y -> x + y)) <*> (Just 1)
+> apl1 :: Num a => Maybe (a -> a)           
+> apl1 = (pure (\x y -> x + y)) <*> (Just 1)  -- structure is preserved. Both arguments are Maybe.
 > apl2, api2', api2'', api2''' :: Num a => Maybe a                  -- You can apply again.
 > apl2    = apl1                                <*> (Just 2)
 > api2'   = (pure (\x y -> x + y)) <*> (Just 1) <*> (Just 2)
