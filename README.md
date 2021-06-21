@@ -36,3 +36,4 @@ In this material, the author plants to cover basic functionality of Haskell, whi
 
 
 As type and functions are interrelated, the order of the subjects presented is different from the above.
+Inteded order of presentation is described in src/Main.lhs.

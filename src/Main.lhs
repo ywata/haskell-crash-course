@@ -31,14 +31,22 @@ the above.
 > import BasicFunction
 > import AbstractDataType
 > import Recursive
-> import HigherOrderFunction
+
+After discussing Recursive module, try to look at test/RecursiveSpec.hs
+
 > import TypeClass hiding (return)
+
+In test/RecursiveSpec.hs, there are some test code commenting out to avoid
+test error, suggest to look at the property test code.
+
 > import IO
+> import HigherOrderFunction
 >
 > main :: IO()
 > main = return ()
 
-
+Some part of the difficulity of learning Haskell is because of many variation of
+compilation error, error messages are collected in error/ directory.
 
 
 
