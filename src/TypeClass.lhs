@@ -232,9 +232,9 @@ Property of Functor class:
 > m1' = map  id [1,2,3]
 
 
-Purpose of Functor class:
+Purpose of Applicative class:
 - apply a function in a structure multiple times
-Property of Functor class:
+Property of Applicative class:
 - Applicative laws
   pure id <*> v              = v                 -- identity
   pure (.) <*> u <*> v <*> w = u <*> (v <*> w)   -- composition
