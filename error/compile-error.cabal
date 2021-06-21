@@ -24,7 +24,8 @@ library error
 
     -- Modules included in this executable, other than Main.
     other-modules:
-        CannotMakeADeriviedInstanceOf,
+        CannotMakeADerivedInstanceOf,
+        CouldNotLoadModule,
         CouldNotMatchExpectedType,
         Hole,
         NoInstanceFor,
@@ -35,5 +36,6 @@ library error
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
     build-depends:    base ^>=4.14.1.0
+                    , QuickCheck >= 2.14.0
   hs-source-dirs:  . 
     default-language: Haskell2010
