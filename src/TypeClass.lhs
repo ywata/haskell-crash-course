@@ -298,7 +298,7 @@ Property of Monad class:
  Monadic laws
  return a   >>= h          = h a              -- unit
  m          >>= return     = m                -- unit
- (m >== g)  >>= h          = m >>= (g >>= h)  -- composition of monad by >>=
+ (m >>= g)  >>= h          = m >>= (g >>= h)  -- composition of monad by >>= is associative.
 
 > class (Applicative m) => Monad m where
 >   return :: a -> m a -- pure
