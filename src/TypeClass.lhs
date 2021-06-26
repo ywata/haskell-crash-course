@@ -244,7 +244,7 @@ Property of Applicative class:
 > class (Functor f) => Applicative f where
 >   pure :: a -> f a                  -- lift value(including function)
 >   (<*>) :: f (a -> b) -> f a -> f b
->   (<$>) :: (a -> b) -> f a -> f b
+>   (<$>) ::   (a -> b) -> f a -> f b
 >   (<$>) f = (<*>) (pure f)
 >
 > instance Applicative Maybe where
