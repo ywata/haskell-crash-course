@@ -325,6 +325,16 @@ We had to distinguish them, order of composition matters,
 n >>= ((f >>= g) >>= h) and n >>= (f >>= (g >>= h)) could be different.
 The law just tells us we do not have to care about it.
 
+Going back to Functor, no associativity law is mentioned. This is because
+function composition is associative in the begginig, it is satisfied.
+
+(fmap f . fmap g) . fmap h = fmap (f . g) . fmap h
+                           = fmap ((f . g) . h)   <-- This is associativity of function 
+                           = fmap (f . (g . h))   <-- composition.
+                           = fmap f . fmap (g . h)
+                           = fmap f . (fmap g . fmap h)
+
+
 > instance Monad Maybe where
 >   return = pure
 >   Just a >>= f = f a
