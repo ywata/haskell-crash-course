@@ -304,9 +304,26 @@ Property of Monad class:
 >   return :: a -> m a -- pure
 >   (>>=) :: m a -> (a -> m b) -> m b
 
-             ^
-             |
-             +------ A Monad
+             m  >>=  f :: m b
+             ^       ^    ^
+             |       |    |
+             |       |    +---------- type of m >>= f.
+             |       +-------- f accepts a value of type a and returns m b
+             +------ A Monad with type m a
+
+If we have (>>=) defined for m, sequencing or composition of functions
+(f::a -> m b, g::b -> m c and  h ::c -> m d)
+is possible starting from n :: m a with:
+
+n >>= f >>= g >>= h
+
+If we did not have associativity of composition of >>=, we have to write above expression by one of
+n >>= ((f >>= g) >>= h) or
+n >>= (f >>= (g >>= h))
+
+We had to distinguish them, order of composition matters,
+n >>= ((f >>= g) >>= h) and n >>= (f >>= (g >>= h)) could be different.
+The law just tells us we do not have to care about it.
 
 > instance Monad Maybe where
 >   return = pure
