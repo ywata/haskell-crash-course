@@ -32,6 +32,7 @@ library
         HigherOrderFunction
         IO
         TypeClass
+        Parser
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
@@ -50,6 +51,7 @@ executable haskell-crash-course
     HigherOrderFunction
     IO
     TypeClass
+    Parser
 
   build-depends:    base ^>=4.14.1.0, text >= 1.2.4.1
   hs-source-dirs: src
