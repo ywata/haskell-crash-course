@@ -85,14 +85,20 @@ data LockState = Open | Closed
   deriving(Show, Eq)
 
 -- checkSafeState 
-checkSafeState :: LockState -> Maybe Int -> Free (Safe Int) a -> LockState
-checkSafeState ls     _   (Pure _)              = ls
-checkSafeState ls     _   (Free (Change sec v)) = checkSafeState ls (Just sec) v
-checkSafeState ls     sec (Free (Lock v))       = checkSafeState Closed sec v
-checkSafeState Open   sec (Free (Unlock _ v))   = checkSafeState Open sec v
-checkSafeState Closed sec (Free (Unlock n v))
-  | sec == Just n = checkSafeState Open sec v
-  | otherwise     = checkSafeState Closed sec v
+checkSafeState :: Maybe LockState   -- Initial state if known
+               -> Maybe Int         -- Initial secret if known
+               -> Free (Safe Int) a -- command sequence
+               -> Maybe LockState   -- final state
+checkSafeState state _ (Pure _) = state
+checkSafeState state sec (Free (Change n v)) = checkSafeState state (Just n) v
+checkSafeState state sec (Free (Lock     v)) = checkSafeState (Just Closed) sec v
+checkSafeState state sec (Free (Unlock n v))
+  | sec == Just n = checkSafeState (Just Open) sec v
+  | otherwise     = checkSafeState state sec v
+
+
+description =  describe safebox
+open = checkSafeState (Just Closed) (Just 123) safebox
 
 
 
