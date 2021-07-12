@@ -90,7 +90,7 @@ checkSafeState :: Maybe LockState   -- Initial state if known
                -> Maybe Int         -- Initial secret if known
                -> Free (Safe Int) a -- command sequence
                -> Maybe LockState   -- final state
-checkSafeState state _ (Pure _) = state
+checkSafeState state _   (Pure _)            = state
 checkSafeState state sec (Free (Change n v)) = checkSafeState state (Just n) v
 checkSafeState state sec (Free (Lock     v)) = checkSafeState (Just Closed) sec v
 checkSafeState state sec (Free (Unlock n v))
