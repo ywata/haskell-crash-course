@@ -47,6 +47,7 @@ data Safe n v = Change   n v  -- Change secret number
                 | Unlock n v  -- Unlock the safe with number
   deriving (Show)
 
+-- Do not confuse this Functor instance and Functor instance of Free f.
 instance Functor (Safe n) where
   fmap f (Change n v) = Change n (f v)
   fmap f (Lock v)     = Lock     (f v)
