@@ -37,9 +37,11 @@ You could perhaps think of it in Java as `A newA = A.parse(a.toString())`.
 Let's go with some examples:
 
 We will use the Bool ADT from previous chapters for a simple example of how to implement Show
+
 > data Bool = False | True
 
 Again, Show takes `a' and returns a String
+
 > class Show a where
 >   show :: a -> String
 
@@ -105,6 +107,7 @@ In both cases, associativity holds.
 So Integer can be Semigroup in at least two senses.
 
 To make a type of an instance of the type class, you can define:
+
 > instance Semigroup Integer where
 >   (<>) m n = m + n
 > -- (<>) = (+)
