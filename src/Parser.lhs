@@ -77,7 +77,7 @@ Parser will be an instance of Functor, Applicative and Monad in this chapter.
 
 
 > charP :: Char -> Parser Char
-> charP ch = Parser (\ss -> f ss)
+> charP ch = Parser f
 >   where
 >     f []                  = Nothing
 >     f (c :ss) | c == ch   = Just (c, ss)
