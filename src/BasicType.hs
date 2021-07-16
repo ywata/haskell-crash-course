@@ -9,7 +9,7 @@ comment -}
 {- You can also
   {- nest
     {- multiple line comment. Yeah! -}
-   -} <-- If you remove this line. You'll be get warned. Because illegal comment nest.
+   -} <-- If you remove this line. You'll receive a warning as this is an illegal comment nest.
 -}
 
 
@@ -113,12 +113,12 @@ type String' = [Char]
 
 :m +BasicTypes
 :t Char
-  --  error: Data constructor not in scope
+  -- error: Data constructor not in scope
 
 :t String
   -- error: Data constructor not in scope
 
 -}
 
--- You cannot get type of Types.
+-- You cannot get the type of Types.
 -- We will find out how to inspect types in the next section!
